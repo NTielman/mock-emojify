@@ -53,7 +53,7 @@ describe('Mock Emoji App', () => {
   })
 
   // TODO fix failing tests
-  it.skip('should ignore special characters', () => {
+  it('should ignore special characters', () => {
     render(<App />);
     const inputField = screen.getByRole('textbox');
     const resultBox = screen.getByTestId('result-box');
@@ -63,7 +63,7 @@ describe('Mock Emoji App', () => {
     expect(resultBox).toHaveTextContent('{🐈} [🐈]');
   })
 
-  it.skip('should handle newlines', () => {
+  it('should handle newlines', () => {
     render(<App />);
     const inputField = screen.getByRole('textbox');
     const resultBox = screen.getByTestId('result-box');
