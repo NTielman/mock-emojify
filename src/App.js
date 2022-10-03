@@ -12,15 +12,18 @@ function App() {
   }
 
   const convertToEmojis = (message) => {
-    const words = message.split(" ");
-    const emojifiedMessage = words.map(word => {
-      const punctationRegex = /[^\w\s]|_/g
-      const keyword = word.replace(punctationRegex, "");
-      const relatedEmoji = Object.keys(emojiLibrary).find(emoji => emojiLibrary[emoji].includes(keyword));
-
-      return relatedEmoji ? word.replace(keyword, relatedEmoji) : word;
+    const lines = message.split(/\n/);
+    const emojifiedMessage = lines.map(line => {
+      const words = line.split(" ");
+      const emojifiedWords = words.map(word => {
+        const punctationRegex = /[^\w\s]|_/g
+        const keyword = word.replace(punctationRegex, "");
+        const hasRelatedEmoji = Object.keys(emojiLibrary).find(emoji => emojiLibrary[emoji].includes(keyword));
+        return hasRelatedEmoji ? word.replace(keyword, hasRelatedEmoji) : word;
+      })
+      return emojifiedWords.join(' ');
     })
-    return emojifiedMessage.join(' ');
+    return emojifiedMessage.join("\n");
   }
 
   return (
